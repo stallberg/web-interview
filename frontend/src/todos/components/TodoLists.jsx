@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState } from 'react'
 import {
   Card,
   CardContent,
@@ -7,51 +7,31 @@ import {
   ListItemText,
   ListItemIcon,
   Typography,
+  CircularProgress,
 } from '@mui/material'
 import ReceiptIcon from '@mui/icons-material/Receipt'
 import { TodoListForm } from './TodoListForm'
-
-// Simulate network
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-
-const fetchTodoLists = () => {
-  return sleep(1000).then(() =>
-    Promise.resolve({
-      '0000000001': {
-        id: '0000000001',
-        title: 'First List',
-        todos: ['First todo of first list!'],
-      },
-      '0000000002': {
-        id: '0000000002',
-        title: 'Second List',
-        todos: ['First todo of second list!'],
-      },
-    })
-  )
-}
+import { useTodosQuery } from '../../hooks/useTodosQuery'
 
 export const TodoLists = ({ style }) => {
-  const [todoLists, setTodoLists] = useState({})
   const [activeList, setActiveList] = useState()
+  const { loading, error, todoLists } = useTodosQuery()
 
-  useEffect(() => {
-    fetchTodoLists().then(setTodoLists)
-  }, [])
+  if (loading) return <CircularProgress style={{ position: 'fixed', top: '50%', left: '50%' }} />
+  if (error) return <Typography component='p'>Error: {error.message}</Typography>
 
-  if (!Object.keys(todoLists).length) return null
   return (
     <Fragment>
       <Card style={style}>
         <CardContent>
           <Typography component='h2'>My Todo Lists</Typography>
           <List>
-            {Object.keys(todoLists).map((key) => (
-              <ListItemButton key={key} onClick={() => setActiveList(key)}>
+            {todoLists.map((todoList, index) => (
+              <ListItemButton key={todoList.id} onClick={() => setActiveList(index)}>
                 <ListItemIcon>
                   <ReceiptIcon />
                 </ListItemIcon>
-                <ListItemText primary={todoLists[key].title} />
+                <ListItemText primary={todoList.title} />
               </ListItemButton>
             ))}
           </List>
@@ -61,13 +41,6 @@ export const TodoLists = ({ style }) => {
         <TodoListForm
           key={activeList} // use key to make React recreate component to reset internal state
           todoList={todoLists[activeList]}
-          saveTodoList={(id, { todos }) => {
-            const listToUpdate = todoLists[id]
-            setTodoLists({
-              ...todoLists,
-              [id]: { ...listToUpdate, todos },
-            })
-          }}
         />
       )}
     </Fragment>
