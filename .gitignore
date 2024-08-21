@@ -1,4 +1,5 @@
 **/.env
+launch.json
 
 # Frontend
 frontend/node_modules
