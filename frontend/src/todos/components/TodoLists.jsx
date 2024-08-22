@@ -3,15 +3,12 @@ import {
   Card,
   CardContent,
   List,
-  ListItemButton,
-  ListItemText,
-  ListItemIcon,
   Typography,
   CircularProgress,
 } from '@mui/material'
-import ReceiptIcon from '@mui/icons-material/Receipt'
 import { TodoListForm } from './TodoListForm'
 import { useTodosQuery } from '../../hooks/useTodosQuery'
+import { TodoListItem } from './TodoListItem'
 
 export const TodoLists = ({ style }) => {
   const [activeList, setActiveList] = useState()
@@ -27,12 +24,11 @@ export const TodoLists = ({ style }) => {
           <Typography component='h2'>My Todo Lists</Typography>
           <List>
             {todoLists.map((todoList, index) => (
-              <ListItemButton key={todoList.id} onClick={() => setActiveList(index)}>
-                <ListItemIcon>
-                  <ReceiptIcon />
-                </ListItemIcon>
-                <ListItemText primary={todoList.title} />
-              </ListItemButton>
+              <TodoListItem
+                todoList={todoList}
+                key={todoList.id}
+                setActiveList={() => setActiveList(index)}
+              />
             ))}
           </List>
         </CardContent>
