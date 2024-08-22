@@ -25,10 +25,7 @@ export const TodoListForm = ({ todoList }) => {
         <form style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
           {todos.map((todo, index) => (
             <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
-              <Typography sx={{ margin: '8px' }} variant='h6'>
-                {index + 1}
-              </Typography>
-              <Todo key={todo.id} todo={todo} />
+              <Todo key={todo.id} todo={todo} listIndex={index} />
             </div>
           ))}
           <CardActions>
