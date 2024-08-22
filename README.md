@@ -21,6 +21,13 @@ Fork the repository (see top-right button on GitHub) and clone the fork to your 
 
  A browsertab will automatically open and load the app.
 
+ ### To start the database
+
+ To setup the local postgres database for the backend, make sure to have Docker and docker-compose installed. Then from the root directory run:
+```
+docker-compose up -d
+```
+
 ### Development set-up
 If you don't have a favorite editor we highly recommend [VSCode](https://code.visualstudio.com). We've also had some ESLint rules set up which will help you catch bugs etc. If you're using VSCode, install the regular [ESLint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and you should be good to go!
 
@@ -51,3 +58,4 @@ Before submitting, read through all changes one last time - code quality matters
 If you have developed without ESLint set up, run `npm run lint` in both `/backend` and `/frontend` and fix any errors/warnings.
 
 Send a link to your forked repository to your contact at Sellpy. Don't forget to mention which tasks you completed.
+
