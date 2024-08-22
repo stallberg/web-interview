@@ -7,26 +7,21 @@ export async function seed(knex) {
   await knex('todo').del()
   await knex('todoList').del()
 
-  const todoLists = [
-    { id: 1, title: 'First List' },
-    { id: 2, title: 'Second List' },
-  ]
+  const [todoList1] = await knex.insert({ title: 'First List' }).into('todoList').returning('id')
+  const [todoList2] = await knex.insert({ title: 'Second List' }).into('todoList').returning('id')
 
   const todos = [
     {
-      id: 1,
       content: 'First todo of first list!',
       completed: false,
-      todoListId: 1,
+      todoListId: todoList1.id,
     },
     {
-      id: 2,
       content: 'First todo of second list!',
       completed: false,
-      todoListId: 2,
+      todoListId: todoList2.id,
     },
   ]
 
-  await knex('todoList').insert(todoLists)
   await knex('todo').insert(todos)
 }
