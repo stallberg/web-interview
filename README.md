@@ -1,9 +1,8 @@
 # Sellpy web interview
 
 ## Assignments solved
-I have solved the main assignment, along with the first 3 additional tasks
+I have solved the main assignment, along with the first 3 additional tasks.
 
-Welcome to Sellpy's web interview repo!
 ## Prerequisites
 
 NodeJS - if you don't already have it installed, check out [nvm](https://github.com/nvm-sh/nvm).
