@@ -7,6 +7,10 @@ NodeJS - if you don't already have it installed, check out [nvm](https://github.
 
 ## Getting started
 Fork the repository (see top-right button on GitHub) and clone the fork to your computer.
+
+### Environment variables
+Rename the `.env.example` to `.env` to setup environment variables for the project
+
 ### To start the backend:
 
  - Navigate to the backend folder
